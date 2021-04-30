@@ -28,7 +28,7 @@ class DbProvider {
         await db.execute('''
           CREATE TABLE Tasks(
             id INTEGER PRIMARY KEY,
-            task TEXT,
+            task TEXT
           )
         ''');
       },

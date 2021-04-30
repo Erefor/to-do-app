@@ -1,9 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todo_app/Providers/TasksProvider.dart';
 import 'package:todo_app/Screens/AddTaskScreen.dart';
 import 'package:todo_app/Widgets/Header.dart';
 import 'package:todo_app/Widgets/TaskList.dart';
 
-class MainScreen extends StatelessWidget {
+class MainScreen extends StatefulWidget {
+  @override
+  _MainScreenState createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
+  @override
+  void initState() {
+    super.initState();
+    Provider.of<TasksProvider>(context, listen: false).loadTasks();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
