@@ -7,7 +7,7 @@ class Header extends StatelessWidget {
   Widget build(BuildContext context) {
     final taskProvider = Provider.of<TasksProvider>(context);
     return Container(
-      margin: EdgeInsets.only(top: 40, right: 0, bottom: 60, left: 30),
+      margin: EdgeInsets.only(top: 15, right: 0, bottom: 33, left: 30),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
