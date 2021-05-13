@@ -7,6 +7,7 @@ class AddTaskScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tasksProvider = Provider.of<TasksProvider>(context);
+    final textEditingController = TextEditingController();
     String newTask;
     return Container(
       decoration: BoxDecoration(
@@ -28,6 +29,7 @@ class AddTaskScreen extends StatelessWidget {
           Container(
             margin: EdgeInsets.symmetric(horizontal: 50, vertical: 30),
             child: TextField(
+              controller: textEditingController,
               onChanged: (value) {
                 newTask = value;
               },
@@ -49,13 +51,41 @@ class AddTaskScreen extends StatelessWidget {
             child: Text('Add'),
             textColor: Colors.white,
             onPressed: () {
-              final newTaskObject = Task(toDo: newTask);
-              tasksProvider.addTaks(newTaskObject);
-              Navigator.pop(context);
+              if(newTask == '' || newTask == null){
+                _showAlert(context);
+                textEditingController.clear();
+              }else{
+                
+                final newTaskObject = Task(toDo: newTask);
+                tasksProvider.addTaks(newTaskObject);
+                textEditingController.clear();
+                Navigator.pop(context);
+              }
+              
             },
           )
         ],
       ),
+    );
+  }
+
+  void _showAlert(BuildContext context) {
+    showDialog(
+      context: context, 
+      builder: (context){
+        return AlertDialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+          title: Center(child: Text('Add some values, please.')),
+          actions: [
+            TextButton(
+              onPressed: (){
+                Navigator.pop(context);
+              }, 
+              child: Text('Got it!')
+            )
+          ],
+        );
+      }
     );
   }
 }

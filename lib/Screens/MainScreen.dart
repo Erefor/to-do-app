@@ -21,6 +21,19 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.blueAccent,
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        actions: <Widget>[
+          IconButton(
+            onPressed: (){
+              Provider.of<TasksProvider>(context,listen: false).killAllTasks();
+              print('borrar');
+            }, 
+            icon: Icon(Icons.delete)
+          )
+        ],
+      ),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

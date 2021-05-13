@@ -27,9 +27,14 @@ class TasksProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  loadTasks() async {
+  void loadTasks() async {
     final tasks = await DbProvider.db.getTasks();
-    this._tasks = tasks;
+    tasks == null ? tasks.length = 0 : this._tasks = tasks;
+    notifyListeners();
+  }
+  void killAllTasks()async{
+    DbProvider.db.killAllTasks();
+    _tasks = [];
     notifyListeners();
   }
 }

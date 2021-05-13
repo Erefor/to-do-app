@@ -64,4 +64,9 @@ class DbProvider {
     final res = await db.delete('Tasks', where: 'id = ?', whereArgs: [id]);
     return res;
   }
+
+  void killAllTasks()async{
+    final db = await dataBase;
+    db.delete('Tasks');
+  }
 }
